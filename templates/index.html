@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SupportAI | Intelligent Customer Support</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     SIDEBAR
+========================================= -->
+
+<aside class="sidebar">
+
+
+    <div class="logo">
+
+        <div class="logo-symbol">
+            ✦
+        </div>
+
+        <div>
+
+            <h2>SUPPORT<span>AI</span></h2>
+
+            <p>INTELLIGENT SUPPORT</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="sidebar-line"></div>
+
+
+    <nav>
+
+        <a class="nav-link active">
+
+            <span class="nav-icon">⌂</span>
+
+            Dashboard
+
+        </a>
+
+
+        <a class="nav-link">
+
+            <span class="nav-icon">▣</span>
+
+            Tickets
+
+        </a>
+
+
+        <a class="nav-link">
+
+            <span class="nav-icon">◈</span>
+
+            AI Agents
+
+        </a>
+
+
+        <a class="nav-link">
+
+            <span class="nav-icon">◫</span>
+
+            Analytics
+
+        </a>
+
+
+        <a class="nav-link">
+
+            <span class="nav-icon">✉</span>
+
+            Feedback
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="system-card">
+
+            <div class="system-header">
+
+                <span class="online-dot"></span>
+
+                <span>SYSTEM ONLINE</span>
+
+            </div>
+
+            <p>All AI agents operational</p>
+
+        </div>
+
+
+        <div class="admin">
+
+            <div class="admin-avatar">
+                S
+            </div>
+
+            <div>
+
+                <strong>Admin</strong>
+
+                <small>Support Manager</small>
+
+            </div>
+
+        </div>
+        <a href="{{ url_for('logout') }}" class="logout-btn">
+    ↪ Logout
+</a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================================
+     MAIN CONTENT
+========================================= -->
+
+<main class="main">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <p class="overline">
+                CUSTOMER INTELLIGENCE PLATFORM
+            </p>
+
+            <h1>
+                Support Command Center
+            </h1>
+
+        </div>
+
+
+        <div class="top-right">
+
+            <div class="date">
+
+                <span>●</span>
+
+                AI SYSTEM ACTIVE
+
+            </div>
+
+            <button class="notification">
+                ♢
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         STATS
+    ========================================= -->
+
+    <section class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <span>TOTAL TICKETS</span>
+
+                <div class="stat-symbol">
+                    #
+                </div>
+
+            </div>
+
+            <h2 id="totalTickets">0</h2>
+
+            <p>
+                Live support requests
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <span>HIGH PRIORITY</span>
+
+                <div class="stat-symbol">
+                    !
+                </div>
+
+            </div>
+
+            <h2 id="highTickets">0</h2>
+
+            <p>
+                Requires attention
+            </p>
+
+        </div>
+
+
+        <div class="stat-card gold-card">
+
+            <div class="stat-top">
+
+                <span>AI HANDLED</span>
+
+                <div class="stat-symbol gold-symbol">
+                    ✦
+                </div>
+
+            </div>
+
+            <h2 id="aiTickets">0</h2>
+
+            <p>
+                Automatically processed
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <span>ESCALATED</span>
+
+                <div class="stat-symbol">
+                    ↑
+                </div>
+
+            </div>
+
+            <h2 id="escalatedTickets">0</h2>
+
+            <p>
+                Human intervention
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =========================================
+         WORKSPACE
+    ========================================= -->
+
+    <section class="workspace">
+     
+
+
+        <!-- CREATE TICKET -->
+
+        <div class="panel ticket-panel">
+
+
+            <div class="panel-heading">
+
+                <div>
+
+                    <p class="gold-label">
+                        NEW REQUEST
+                    </p>
+
+                    <h2>
+                        Create Support Ticket
+                    </h2>
+
+                    <p class="panel-description">
+                        Submit a customer problem and let
+                        our AI agents analyze it.
+                    </p>
+
+                </div>
+
+
+                <div class="ai-orb">
+
+                    <span>✦</span>
+
+                </div>
+
+            </div>
+
+
+            <form id="ticketForm">
+
+
+                <div class="field">
+
+                    <label>
+                        CUSTOMER NAME
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="Enter customer name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        QUERY / PROBLEM
+                    </label>
+
+                    <textarea
+                        id="query"
+                        placeholder="Describe the customer's issue..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        DEPARTMENT
+                    </label>
+
+                    <select id="department">
+
+                        <option value="Customer Support">
+                            Customer Support
+                        </option>
+
+                        <option value="Technical">
+                            Technical
+                        </option>
+
+                        <option value="Payment">
+                            Payment
+                        </option>
+
+                        <option value="Delivery">
+                            Delivery
+                        </option>
+
+                        <option value="Product">
+                            Product
+                        </option>
+
+                        <option value="Account">
+                            Account
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-btn">
+
+                    <span>✦</span>
+
+                    ANALYZE & SUBMIT
+
+                    <span>→</span>
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+
+        <!-- =========================================
+             AI AGENT WORKFLOW
+        ========================================= -->
+
+        <div class="panel workflow-panel">
+
+
+            <div class="workflow-header">
+
+                <div>
+
+                    <p class="gold-label">
+                        AI ENGINE
+                    </p>
+
+                    <h2>
+                        Agent Workflow
+                    </h2>
+
+                </div>
+
+
+                <div class="live">
+
+                    <span></span>
+
+                    LIVE
+
+                </div>
+
+            </div>
+
+
+            <div class="workflow">
+
+
+                <div class="agent">
+
+                    <div class="agent-icon">
+                        01
+                    </div>
+
+                    <div class="agent-text">
+
+                        <strong>
+                            Classification Agent
+                        </strong>
+
+                        <small>
+                            Understands customer intent
+                        </small>
+
+                    </div>
+
+                    <div class="agent-status">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <div class="connector"></div>
+
+
+                <div class="agent">
+
+                    <div class="agent-icon">
+                        02
+                    </div>
+
+                    <div class="agent-text">
+
+                        <strong>
+                            Priority Agent
+                        </strong>
+
+                        <small>
+                            Calculates urgency level
+                        </small>
+
+                    </div>
+
+                    <div class="agent-status">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <div class="connector"></div>
+
+
+                <div class="agent featured">
+
+                    <div class="agent-icon">
+                        03
+                    </div>
+
+                    <div class="agent-text">
+
+                        <strong>
+                            Resolution Agent
+                        </strong>
+
+                        <small>
+                            Generates intelligent solution
+                        </small>
+
+                    </div>
+
+                    <div class="agent-status">
+                        ✦
+                    </div>
+
+                </div>
+
+
+                <div class="connector"></div>
+
+
+                <div class="agent">
+
+                    <div class="agent-icon">
+                        04
+                    </div>
+
+                    <div class="agent-text">
+
+                        <strong>
+                            Escalation Agent
+                        </strong>
+
+                        <small>
+                            Routes complex issues
+                        </small>
+
+                    </div>
+
+                    <div class="agent-status">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <div class="connector"></div>
+
+
+                <div class="agent">
+
+                    <div class="agent-icon">
+                        05
+                    </div>
+
+                    <div class="agent-text">
+
+                        <strong>
+                            Feedback Learning
+                        </strong>
+
+                        <small>
+                            Improves future responses
+                        </small>
+
+                    </div>
+
+                    <div class="agent-status">
+                        ✓
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         TICKETS
+    ========================================= -->
+
+    <section class="tickets-section">
+
+
+        <div class="tickets-header">
+
+            <div>
+
+                <p class="gold-label">
+                    LIVE OPERATIONS
+                </p>
+
+                <h2>
+                    Customer Tickets
+                </h2>
+
+            </div>
+
+
+            <div class="live-count">
+
+                <span></span>
+
+                REAL-TIME
+
+            </div>
+
+        </div>
+
+
+        <div id="ticketList">
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    ✦
+                </div>
+
+                <h3>
+                    No support tickets
+                </h3>
+
+                <p>
+                    Submit a customer issue to activate
+                    the AI resolution workflow.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<script src="{{ url_for('static', filename='script.js') }}">
+</script>
+<!-- =========================================
+     RAG RESULT MODAL
+========================================= -->
+
+<div id="ragModal" class="rag-modal">
+
+    <div class="rag-modal-overlay"></div>
+
+    <div class="rag-modal-content">
+
+        <div class="rag-modal-header">
+
+            <div>
+                <p class="gold-label">AI INTELLIGENCE</p>
+
+                <h2>Ticket Resolution Pipeline</h2>
+
+                <p>
+                    RAG-powered analysis and resolution
+                </p>
+            </div>
+
+            <button id="closeRagModal" class="rag-close">
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- PIPELINE -->
+
+        <div class="rag-pipeline">
+
+            <div class="rag-stage" id="ragStage1">
+
+                <div class="rag-number">01</div>
+
+                <div>
+                    <strong>Ticket Analysis</strong>
+                    <small>Understand customer intent</small>
+                </div>
+
+                <span class="rag-check">✓</span>
+
+            </div>
+
+
+            <div class="rag-arrow">→</div>
+
+
+            <div class="rag-stage" id="ragStage2">
+
+                <div class="rag-number">02</div>
+
+                <div>
+                    <strong>Knowledge Retrieval</strong>
+                    <small>Search support knowledge</small>
+                </div>
+
+                <span class="rag-check">✓</span>
+
+            </div>
+
+
+            <div class="rag-arrow">→</div>
+
+
+            <div class="rag-stage" id="ragStage3">
+
+                <div class="rag-number">03</div>
+
+                <div>
+                    <strong>Context Augmentation</strong>
+                    <small>Build relevant context</small>
+                </div>
+
+                <span class="rag-check">✓</span>
+
+            </div>
+
+
+            <div class="rag-arrow">→</div>
+
+
+            <div class="rag-stage featured-rag" id="ragStage4">
+
+                <div class="rag-number">04</div>
+
+                <div>
+                    <strong>Response Generation</strong>
+                    <small>Generate AI resolution</small>
+                </div>
+
+                <span class="rag-check">✦</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOADING -->
+
+        <div id="ragLoading" class="rag-loading">
+
+            <div class="rag-loader"></div>
+
+            <h3>AI is analyzing the ticket...</h3>
+
+            <p>
+                Retrieving knowledge and generating resolution
+            </p>
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div id="ragResult" class="rag-result">
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+</body>
+
+</html>
