@@ -25,7 +25,57 @@ def home():
 
     return render_template("index.html")
 @app.route("/login", methods=["GET", "POST"])
-def login():    return render_template("login.html")
+def login():
+
+    if request.method == "POST":
+
+        email = request.form.get("email", "").strip().lower()
+        password = request.form.get("password", "")
+
+        # Check empty fields
+        if not email or not password:
+            return render_template(
+                "login.html",
+                error="Please enter email and password."
+            )
+
+        # Connect to database
+        conn = get_db_connection()
+
+        user = conn.execute(
+            """
+            SELECT *
+            FROM users
+            WHERE email = ?
+            """,
+            (email,)
+        ).fetchone()
+
+        conn.close()
+
+        # User not found
+        if user is None:
+            return render_template(
+                "login.html",
+                error="Account not found. Please check your email."
+            )
+
+        # Verify password
+        if not verify_password(password, user["password_hash"]):
+            return render_template(
+                "login.html",
+                error="Incorrect password."
+            )
+
+        # Create session
+        session["user_id"] = user["id"]
+        session["user_name"] = user["name"]
+        session["user_email"] = user["email"]
+
+        # Login successful
+        return redirect(url_for("home"))
+
+    return render_template("login.html")
 # =====================================================
 # SIGNUP
 # =====================================================

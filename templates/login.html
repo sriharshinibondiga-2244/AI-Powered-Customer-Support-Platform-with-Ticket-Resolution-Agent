@@ -311,8 +311,8 @@
 
         {% endif %}
 
-        <form method="POST"
-              action="/login">
+       <form method="POST"
+      action="{{ url_for('login') }}">
 
             <div class="form-group">
 
@@ -356,9 +356,9 @@
 
             Don't have an account?
 
-            <a href="/signup">
-                Create Account
-            </a>
+            <a href="{{ url_for('signup') }}">
+    Create Account
+</a>
 
         </div>
 
