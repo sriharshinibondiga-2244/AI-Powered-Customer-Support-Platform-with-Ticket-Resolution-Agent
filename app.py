@@ -4,6 +4,9 @@ from auth import hash_password, verify_password
 from knowledge_base import search_knowledge
 from datetime import datetime
 from rag_pipeline import run_rag
+from multi_agent_workflow import run_multi_agent_workflow
+from email_service import send_resolution_email
+from jira_service import create_jira_issue
 
 
 app = Flask(__name__)
@@ -24,6 +27,15 @@ def home():
         return redirect(url_for("login"))
 
     return render_template("index.html")
+
+
+@app.route("/dashboard")
+def dashboard():
+
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    return render_template("dashboard.html")
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
@@ -373,66 +385,49 @@ def determine_escalation(priority, category):
 # SUBMIT TICKET
 # =====================================================
 
+# =========================================
+# SUBMIT TICKET - MULTI AGENT WORKFLOW
+# =========================================
 @app.route("/submit", methods=["POST"])
 def submit_ticket():
 
     data = request.get_json()
 
-    customer_name = data.get(
-        "customer_name",
-        ""
-    ).strip()
+    customer_name = data.get("customer_name", "").strip()
+    customer_email = data.get("customer_email", "").strip()
+    query = data.get("query", "").strip()
+    department = data.get("department", "").strip()
 
-    query = data.get(
-        "query",
-        ""
-    ).strip()
-
-    department = data.get(
-        "department",
-        ""
-    ).strip()
-
-    # ---------------------------------------------
-    # VALIDATION
-    # ---------------------------------------------
-
-    if not customer_name or not query:
-
+    if not customer_name or not customer_email or not query:
         return jsonify({
             "success": False,
-            "message": "Customer name and query are required."
+            "message": "Customer name, email and query are required."
         }), 400
 
-    # ---------------------------------------------
-    # AI PIPELINE + RAG
-    # ---------------------------------------------
+    # RUN MULTI-AGENT WORKFLOW
+    workflow_result = run_multi_agent_workflow(query)
 
-    # 1. Ticket Classification
-    category = classify_ticket(query)
+    workflow = workflow_result["workflow"]
 
-    # 2. Priority Agent
+    # DIAGNOSIS
+    category = workflow["diagnosis"]["category"]
+
+    # PRIORITY
     priority, priority_score = calculate_priority(
         query,
         category
     )
 
-    # 3. RAG Pipeline
-    rag_result = run_rag(query)
+    # RESOLUTION
+    resolution = workflow["resolution"]["resolution"]
 
-    # 4. RAG Resolution
-    resolution = rag_result["resolution"]["response"]
+    # VALIDATION CONFIDENCE
+    validation_confidence = workflow["validation"]["confidence"]
 
-    # 5. Escalation Agent
-    escalation = determine_escalation(
-        priority,
-        category
-    )
+    # ESCALATION
+    escalation = workflow["escalation"]["escalation"]
 
-    # ---------------------------------------------
-    # CREATE TICKET ID
-    # ---------------------------------------------
-
+    # TICKET ID
     ticket_id = (
         "TKT-" +
         datetime.now().strftime("%Y%m%d%H%M%S")
@@ -442,10 +437,90 @@ def submit_ticket():
         "%Y-%m-%d %H:%M:%S"
     )
 
-    # ---------------------------------------------
-    # SAVE TO DATABASE
-    # ---------------------------------------------
+    # EMAIL STATUS
+    email_sent = False
 
+    # SEND EMAIL ONLY IF CONFIDENCE IS BELOW 70%
+    if validation_confidence < 70:
+
+        try:
+
+            send_resolution_email(
+                customer_email=customer_email,
+                customer_name=customer_name,
+                ticket_id=ticket_id,
+                query=query,
+                category=category,
+                resolution=resolution
+            )
+
+            email_sent = True
+
+            print("======================================")
+            print("EMAIL SENT SUCCESSFULLY")
+            print("Customer:", customer_email)
+            print("Ticket:", ticket_id)
+            print("Validation Confidence:", validation_confidence)
+            print("======================================")
+
+        except Exception as email_error:
+
+            print("======================================")
+            print("EMAIL ERROR:", email_error)
+            print("======================================")
+
+            email_sent = False
+
+    else:
+
+        print("======================================")
+        print("NO EMAIL REQUIRED")
+        print("Validation Confidence:", validation_confidence)
+        print("Ticket:", ticket_id)
+        print("======================================")
+            # =========================================
+    # JIRA ESCALATION
+    # =========================================
+
+    jira_created = False
+    jira_issue_key = None
+    jira_issue_url = None
+
+    if validation_confidence < 70:
+
+        try:
+
+            jira_result = create_jira_issue(
+                ticket_id=ticket_id,
+                customer_name=customer_name,
+                customer_email=customer_email,
+                query=query,
+                category=category,
+                priority=priority,
+                confidence=validation_confidence,
+                resolution=resolution
+            )
+
+            jira_created = True
+            jira_issue_key = jira_result.get("issue_key")
+            jira_issue_url = jira_result.get("issue_url")
+
+            print("======================================")
+            print("JIRA ISSUE CREATED SUCCESSFULLY")
+            print("Issue:", jira_issue_key)
+            print("URL:", jira_issue_url)
+            print("Ticket:", ticket_id)
+            print("======================================")
+
+        except Exception as jira_error:
+
+            print("======================================")
+            print("JIRA ERROR:", jira_error)
+            print("======================================")
+
+            jira_created = False
+
+    # SAVE TICKET
     conn = get_db_connection()
 
     conn.execute(
@@ -465,10 +540,8 @@ def submit_ticket():
             status,
             created_at
         )
-
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
-
         (
             ticket_id,
             customer_name,
@@ -488,79 +561,42 @@ def submit_ticket():
     conn.commit()
     conn.close()
 
-    # ---------------------------------------------
-    # SEND RESULT TO FRONTEND
-    # ---------------------------------------------
-
     return jsonify({
-
         "success": True,
-
         "ticket_id": ticket_id,
-
         "category": category,
-
         "priority": priority,
-
         "priority_score": priority_score,
-
         "resolution": resolution,
-
         "escalation": escalation,
-
-        "rag": {
-
-            "retrieved_documents":
-                rag_result["retrieved_documents"],
-
-            "context":
-                rag_result["context"],
-
-            "confidence":
-                rag_result["resolution"]["confidence"]
-
-        }
-
-    })  
-# =====================================================
-# GET ALL TICKETS
-# =====================================================
-
-@app.route("/tickets")
+        "validation_confidence": validation_confidence,
+        "email_sent": email_sent,
+            "jira_created": jira_created,
+    "jira_issue_key": jira_issue_key,
+    "jira_issue_url": jira_issue_url,
+        "workflow": workflow_result
+    })
+@app.route("/tickets", methods=["GET"])
 def get_tickets():
-
     conn = get_db_connection()
 
     tickets = conn.execute(
-        """
-        SELECT *
-        FROM tickets
-        ORDER BY id DESC
-        """
+        "SELECT * FROM tickets ORDER BY id DESC"
     ).fetchall()
 
     conn.close()
 
-    return jsonify([
-        dict(ticket)
-        for ticket in tickets
-    ])
+    return jsonify([dict(ticket) for ticket in tickets])
 
-
-
- 
 
 # =====================================================
 # FEEDBACK
 # =====================================================
 
-@app.route(
-    "/feedback/<ticket_id>",
-    methods=["POST"]
-)
+@app.route("/feedback/<ticket_id>", methods=["POST"])
 def submit_feedback(ticket_id):
 
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
 
     feedback = data.get(
         "feedback",
@@ -569,23 +605,15 @@ def submit_feedback(ticket_id):
 
     conn = get_db_connection()
 
-    # Update ticket
     conn.execute(
         """
         UPDATE tickets
-
         SET feedback = ?
-
         WHERE ticket_id = ?
         """,
-
-        (
-            feedback,
-            ticket_id
-        )
+        (feedback, ticket_id)
     )
 
-    # Store feedback separately
     conn.execute(
         """
         INSERT INTO feedback
@@ -595,26 +623,21 @@ def submit_feedback(ticket_id):
             comment,
             created_at
         )
-
         VALUES (?, ?, ?, ?)
         """,
-
         (
             ticket_id,
             feedback,
             "",
-            datetime.now().strftime(
-                "%Y-%m-%d %H:%M:%S"
-            )
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         )
     )
 
     conn.commit()
     conn.close()
 
-    return jsonify({
-        "success": True
-    })
+    return jsonify({"success": True})
+
 
 # ==============================
 # RAG TEST ROUTE

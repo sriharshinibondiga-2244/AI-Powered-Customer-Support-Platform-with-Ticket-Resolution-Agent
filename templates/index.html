@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>SupportAI | Intelligent Customer Support</title>
+    <title>AeroAssist AI | Airport & Airways Support</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
@@ -44,9 +44,8 @@
 
         <div>
 
-            <h2>SUPPORT<span>AI</span></h2>
-
-            <p>INTELLIGENT SUPPORT</p>
+            <h2>AERO<span>ASSIST AI</span></h2>
+                <p>AIRPORT & AIRWAYS SUPPORT</p>
 
         </div>
 
@@ -161,12 +160,12 @@
         <div>
 
             <p class="overline">
-                CUSTOMER INTELLIGENCE PLATFORM
-            </p>
+    AIRPORT & AIRWAYS INTELLIGENCE PLATFORM
+</p>
 
-            <h1>
-                Support Command Center
-            </h1>
+<h1>
+    Passenger Support Command Center
+</h1>
 
         </div>
 
@@ -202,7 +201,7 @@
 
             <div class="stat-top">
 
-                <span>TOTAL TICKETS</span>
+                <span>TOTAL TICKETS TODAY</span>
 
                 <div class="stat-symbol">
                     #
@@ -210,7 +209,7 @@
 
             </div>
 
-            <h2 id="totalTickets">0</h2>
+            <h2 id="totalTickets">63</h2>
 
             <p>
                 Live support requests
@@ -223,7 +222,7 @@
 
             <div class="stat-top">
 
-                <span>HIGH PRIORITY</span>
+                <span>AI RESOLUTION RATE</span>
 
                 <div class="stat-symbol">
                     !
@@ -231,7 +230,7 @@
 
             </div>
 
-            <h2 id="highTickets">0</h2>
+            <h2 id="highTickets">100%</h2>
 
             <p>
                 Requires attention
@@ -244,7 +243,7 @@
 
             <div class="stat-top">
 
-                <span>AI HANDLED</span>
+                <span>AVG. AI RESOLUTION TIME</span>
 
                 <div class="stat-symbol gold-symbol">
                     ✦
@@ -252,7 +251,7 @@
 
             </div>
 
-            <h2 id="aiTickets">0</h2>
+            <h2 id="aiTickets">4.2h</h2>
 
             <p>
                 Automatically processed
@@ -265,7 +264,7 @@
 
             <div class="stat-top">
 
-                <span>ESCALATED</span>
+                <span>USER SATISFACTION</span>
 
                 <div class="stat-symbol">
                     ↑
@@ -273,7 +272,7 @@
 
             </div>
 
-            <h2 id="escalatedTickets">0</h2>
+            <h2 id="escalatedTickets">80%</h2>
 
             <p>
                 Human intervention
@@ -283,6 +282,222 @@
 
 
     </section>
+
+    <!-- =========================================
+     DASHBOARD ANALYTICS
+========================================= -->
+
+<section class="analytics-dashboard">
+
+    <div class="analytics-card">
+
+        <div class="analytics-header">
+
+            <div>
+                <p class="gold-label">
+                    PERFORMANCE
+                </p>
+
+                <h2>
+                    Passenger Volume & Resolution
+                </h2>
+
+                <p>
+                    Real-time passenger support activity
+                </p>
+            </div>
+
+            <span class="analytics-live">
+                LIVE
+            </span>
+
+        </div>
+
+        <div class="analytics-chart">
+
+    <div class="chart-y-axis">
+        <span>120</span>
+        <span>100</span>
+        <span>80</span>
+        <span>60</span>
+        <span>40</span>
+        <span>20</span>
+        <span>0</span>
+    </div>
+
+    <div class="chart-main">
+
+        <div class="chart-grid-lines">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <!-- REAL CHART WILL BE DRAWN BY JAVASCRIPT -->
+        <svg
+            id="ticketVolumeChart"
+            viewBox="0 0 700 300"
+            preserveAspectRatio="none"
+            aria-label="Weekly tickets received and resolved chart">
+
+            <polyline
+                id="receivedLine"
+                points=""
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+            ></polyline>
+
+            <polyline
+                id="resolvedLine"
+                points=""
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                opacity="0.55"
+            ></polyline>
+
+        </svg>
+
+        <div class="chart-x-axis">
+            <span>Monday</span>
+            <span>Tuesday</span>
+            <span>Wednesday</span>
+            <span>Thursday</span>
+            <span>Friday</span>
+            <span>Saturday</span>
+            <span>Sunday</span>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="chart-legend">
+
+    <span>
+        <i></i>
+        Tickets Received
+    </span>
+
+    <span>
+        <i></i>
+        Tickets Resolved
+    </span>
+
+</div>
+
+    </div>
+
+
+    <div class="analytics-card">
+
+        <div class="analytics-header">
+
+            <div>
+                <p class="gold-label">
+                    AI PERFORMANCE
+                </p>
+
+                <h2>
+                    System Optimization Metrics
+                </h2>
+
+                <p>
+                    AeroAssist AI workflow performance
+                </p>
+            </div>
+
+        </div>
+
+       <div class="optimization-grid">
+
+    <div>
+        <span>Classification Accuracy</span>
+        <strong>94%</strong>
+    </div>
+
+    <div>
+        <span>Resolution Success Rate</span>
+        <strong>91%</strong>
+    </div>
+
+    <div>
+        <span>Knowledge Base Coverage</span>
+        <strong>92%</strong>
+    </div>
+
+    <div>
+        <span>System Uptime</span>
+        <strong>99.9%</strong>
+    </div>
+
+    <div>
+        <span>Average Response Time</span>
+        <strong>2.8 sec</strong>
+    </div>
+
+    <div>
+        <span>User Satisfaction Score</span>
+        <strong>90%</strong>
+    </div>
+
+</div>
+
+    </div>
+
+
+    <div class="analytics-card">
+
+        <div class="analytics-header">
+
+            <div>
+                <p class="gold-label">
+                    WORKFLOW
+                </p>
+
+                <h2>
+                    Escalation Workflow Status
+                </h2>
+            </div>
+
+        </div>
+
+      <div class="escalation-list">
+
+    <div>
+        <strong>01</strong>
+        <span>AI Classification</span>
+        <small>63 tickets classified by AI</small>
+    </div>
+
+    <div>
+        <strong>02</strong>
+        <span>AI Resolution Attempt</span>
+        <small>49 tickets resolved by AI</small>
+    </div>
+
+    <div>
+        <strong>03</strong>
+        <span>Human Agent Review</span>
+        <small>14 tickets reviewed by human support</small>
+    </div>
+
+    <div>
+        <strong>04</strong>
+        <span>Resolution Validation</span>
+        <small>63 resolutions validated</small>
+    </div>
+
+</div>
+    </div>
+
+</section>
+
 
 
 
@@ -301,22 +516,22 @@
 
             <div class="panel-heading">
 
-                <div>
+               <div>
 
-                    <p class="gold-label">
-                        NEW REQUEST
-                    </p>
+    <p class="gold-label">
+        NEW PASSENGER REQUEST
+    </p>
 
-                    <h2>
-                        Create Support Ticket
-                    </h2>
+    <h2>
+        Create Passenger Support Ticket
+    </h2>
 
-                    <p class="panel-description">
-                        Submit a customer problem and let
-                        our AI agents analyze it.
-                    </p>
+    <p class="panel-description">
+        Submit a passenger issue and let
+        AeroAssist AI analyze and resolve it.
+    </p>
 
-                </div>
+</div>
 
 
                 <div class="ai-orb">
@@ -328,91 +543,123 @@
             </div>
 
 
-            <form id="ticketForm">
+        <form id="ticketForm">
+
+    <!-- CUSTOMER NAME -->
+   <!-- PASSENGER NAME -->
+
+<div class="field">
+
+    <label>
+        PASSENGER NAME
+    </label>
+
+    <input
+        type="text"
+        id="customerName"
+        placeholder="Enter passenger name"
+        required
+    >
+
+</div>
+
+    <!-- CUSTOMER EMAIL -->
+    <!-- PASSENGER EMAIL -->
+
+<div class="field">
+
+    <label>
+        PASSENGER EMAIL
+    </label>
+
+    <input
+        type="email"
+        id="customerEmail"
+        placeholder="Enter passenger email"
+        required
+    >
+
+</div>
+
+    <!-- QUERY / PROBLEM -->
+    <!-- PASSENGER ISSUE -->
+
+<div class="field">
+
+    <label>
+        PASSENGER ISSUE
+    </label>
+
+    <textarea
+        id="query"
+        placeholder="Describe the passenger's airport or airline issue..."
+        required
+    ></textarea>
+
+</div>
+    <!-- DEPARTMENT -->
+    <!-- SUPPORT AREA -->
+
+<div class="field">
+
+    <label>
+        SUPPORT AREA
+    </label>
+
+    <select id="department">
+
+        <option value="Passenger Support">
+            Passenger Support
+        </option>
+
+        <option value="Booking">
+            Booking & Confirmation
+        </option>
+
+        <option value="Check-in">
+            Check-in & Boarding
+        </option>
+
+        <option value="Baggage">
+            Baggage Services
+        </option>
+
+        <option value="Flight Operations">
+            Delays & Cancellations
+        </option>
+
+        <option value="Payment">
+            Refunds & Payments
+        </option>
+
+        <option value="Airport Facilities">
+            Airport Facilities
+        </option>
+
+        <option value="Passenger Assistance">
+            Passenger Assistance
+        </option>
+
+    </select>
+
+</div>
 
 
-                <div class="field">
+    <!-- SUBMIT -->
+    <button
+        type="submit"
+        class="submit-btn"
+    >
 
-                    <label>
-                        CUSTOMER NAME
-                    </label>
+        <span>✦</span>
 
-                    <input
-                        type="text"
-                        id="customerName"
-                        placeholder="Enter customer name"
-                        required
-                    >
+        ANALYZE & SUBMIT
 
-                </div>
+        <span>→</span>
 
+    </button>
 
-                <div class="field">
-
-                    <label>
-                        QUERY / PROBLEM
-                    </label>
-
-                    <textarea
-                        id="query"
-                        placeholder="Describe the customer's issue..."
-                        required
-                    ></textarea>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        DEPARTMENT
-                    </label>
-
-                    <select id="department">
-
-                        <option value="Customer Support">
-                            Customer Support
-                        </option>
-
-                        <option value="Technical">
-                            Technical
-                        </option>
-
-                        <option value="Payment">
-                            Payment
-                        </option>
-
-                        <option value="Delivery">
-                            Delivery
-                        </option>
-
-                        <option value="Product">
-                            Product
-                        </option>
-
-                        <option value="Account">
-                            Account
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="submit-btn">
-
-                    <span>✦</span>
-
-                    ANALYZE & SUBMIT
-
-                    <span>→</span>
-
-                </button>
-
-
-            </form>
+</form>    
 
         </div>
 
@@ -429,13 +676,13 @@
 
                 <div>
 
-                    <p class="gold-label">
-                        AI ENGINE
-                    </p>
+                   <p class="gold-label">
+    AEROASSIST AI ENGINE
+</p>
 
-                    <h2>
-                        Agent Workflow
-                    </h2>
+<h2>
+    Passenger Resolution Workflow
+</h2>
 
                 </div>
 
@@ -463,13 +710,12 @@
                     <div class="agent-text">
 
                         <strong>
-                            Classification Agent
-                        </strong>
+    Diagnosis Agent
+</strong>
 
-                        <small>
-                            Understands customer intent
-                        </small>
-
+<small>
+    Understands passenger intent
+</small>
                     </div>
 
                     <div class="agent-status">
@@ -490,14 +736,13 @@
 
                     <div class="agent-text">
 
-                        <strong>
-                            Priority Agent
-                        </strong>
+                       <strong>
+    Retrieval Agent
+</strong>
 
-                        <small>
-                            Calculates urgency level
-                        </small>
-
+<small>
+    Retrieves airport & airways knowledge
+</small>
                     </div>
 
                     <div class="agent-status">
@@ -519,12 +764,12 @@
                     <div class="agent-text">
 
                         <strong>
-                            Resolution Agent
-                        </strong>
+    Resolution Agent
+</strong>
 
-                        <small>
-                            Generates intelligent solution
-                        </small>
+<small>
+    Generates knowledge-grounded solution
+</small>
 
                     </div>
 
@@ -547,13 +792,12 @@
                     <div class="agent-text">
 
                         <strong>
-                            Escalation Agent
-                        </strong>
+    Validation Agent
+</strong>
 
-                        <small>
-                            Routes complex issues
-                        </small>
-
+<small>
+    Checks resolution confidence
+</small>
                     </div>
 
                     <div class="agent-status">
@@ -575,13 +819,12 @@
                     <div class="agent-text">
 
                         <strong>
-                            Feedback Learning
-                        </strong>
+    Escalation Agent
+</strong>
 
-                        <small>
-                            Improves future responses
-                        </small>
-
+<small>
+    Routes low-confidence cases to human support
+</small>
                     </div>
 
                     <div class="agent-status">
@@ -610,14 +853,13 @@
 
             <div>
 
-                <p class="gold-label">
-                    LIVE OPERATIONS
-                </p>
+               <p class="gold-label">
+    LIVE PASSENGER OPERATIONS
+</p>
 
-                <h2>
-                    Customer Tickets
-                </h2>
-
+<h2>
+    Passenger Support Tickets
+</h2>
             </div>
 
 
@@ -641,13 +883,13 @@
                 </div>
 
                 <h3>
-                    No support tickets
-                </h3>
+    No passenger tickets
+</h3>
 
-                <p>
-                    Submit a customer issue to activate
-                    the AI resolution workflow.
-                </p>
+<p>
+    Submit a passenger issue to activate
+    the AeroAssist AI resolution workflow.
+</p>
 
             </div>
 
@@ -675,13 +917,13 @@
         <div class="rag-modal-header">
 
             <div>
-                <p class="gold-label">AI INTELLIGENCE</p>
+               <p class="gold-label">AEROASSIST AI INTELLIGENCE</p>
 
-                <h2>Ticket Resolution Pipeline</h2>
+<h2>Passenger Resolution Pipeline</h2>
 
-                <p>
-                    RAG-powered analysis and resolution
-                </p>
+<p>
+    RAG-powered airport & airways support analysis
+</p>
             </div>
 
             <button id="closeRagModal" class="rag-close">

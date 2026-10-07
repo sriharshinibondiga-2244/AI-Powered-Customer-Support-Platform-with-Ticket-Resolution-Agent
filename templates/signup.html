@@ -10,13 +10,23 @@
 
     <title>SUPPORTAI | Create Account</title>
 
+
     <style>
 
+        /* =========================================
+           RESET
+           ========================================= */
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
+
+
+        /* =========================================
+           BODY
+           ========================================= */
 
         body {
 
@@ -28,99 +38,160 @@
 
             justify-content: center;
 
-            background:
-                radial-gradient(
-                    circle at top right,
-                    #292000,
-                    #080808 42%
-                );
+            background: #eef1f4;
 
-            color: #f5f5f5;
+            color: #25282d;
 
-            font-family: Arial, Helvetica, sans-serif;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            padding: 30px;
+
         }
 
-        .container {
 
-            width: 440px;
+        /* =========================================
+           SIGNUP CARD
+           ========================================= */
 
-            padding: 40px;
+        .signup-container {
 
-            background: #111111;
+            width: 450px;
 
-            border: 1px solid #292929;
+            padding: 42px;
+
+            background: #ffffff;
+
+            border: 1px solid #d9dde3;
 
             border-radius: 20px;
 
             box-shadow:
-                0 0 50px
-                rgba(212, 175, 55, 0.12);
+                0 18px 45px
+                rgba(0, 0, 0, 0.09);
+
         }
+
+
+        /* =========================================
+           LOGO
+           ========================================= */
 
         .logo {
 
             text-align: center;
 
-            margin-bottom: 25px;
+            margin-bottom: 28px;
+
         }
+
 
         .logo-icon {
 
-            width: 58px;
-            height: 58px;
+            width: 62px;
+
+            height: 62px;
 
             margin: auto;
 
             display: flex;
 
-            justify-content: center;
             align-items: center;
 
-            background: #d4af37;
+            justify-content: center;
 
-            color: #080808;
+            background: #dc2626;
 
-            border-radius: 14px;
+            color: #ffffff;
 
-            font-size: 27px;
+            border-radius: 15px;
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 8px 22px
+                rgba(220, 38, 38, 0.20);
+
         }
+
 
         .logo h1 {
 
-            margin-top: 15px;
+            margin-top: 16px;
+
+            font-size: 26px;
 
             letter-spacing: 3px;
 
-            font-size: 24px;
+            color: #25282d;
+
         }
 
-        .logo span {
 
-            color: #d4af37;
+        .logo h1 span {
+
+            color: #dc2626;
+
         }
+
+
+        .logo p {
+
+            margin-top: 7px;
+
+            color: #7b818a;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+
+        }
+
+
+        /* =========================================
+           TITLE
+           ========================================= */
 
         h2 {
 
             text-align: center;
 
             margin-bottom: 8px;
+
+            font-size: 24px;
+
+            color: #25282d;
+
         }
+
 
         .subtitle {
 
             text-align: center;
 
-            color: #888;
+            color: #6b7280;
 
-            font-size: 13px;
+            font-size: 14px;
 
-            margin-bottom: 25px;
+            margin-bottom: 26px;
+
         }
 
-        .group {
+
+        /* =========================================
+           FORM
+           ========================================= */
+
+        .form-group {
 
             margin-bottom: 17px;
+
         }
+
 
         label {
 
@@ -129,29 +200,60 @@
             margin-bottom: 7px;
 
             font-size: 13px;
+
+            font-weight: 600;
+
+            color: #374151;
+
         }
+
 
         input {
 
             width: 100%;
 
-            padding: 13px;
+            padding: 13px 14px;
 
-            background: #090909;
+            background: #f5f6f8;
 
-            border: 1px solid #303030;
+            border: 1px solid #d9dde3;
 
-            color: white;
+            border-radius: 9px;
 
-            border-radius: 8px;
+            color: #25282d;
 
             outline: none;
+
+            font-size: 14px;
+
+            transition: all 0.25s ease;
+
         }
+
+
+        input::placeholder {
+
+            color: #9ca3af;
+
+        }
+
 
         input:focus {
 
-            border-color: #d4af37;
+            background: #ffffff;
+
+            border-color: #dc2626;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(220, 38, 38, 0.10);
+
         }
+
+
+        /* =========================================
+           CREATE ACCOUNT BUTTON
+           ========================================= */
 
         button {
 
@@ -159,13 +261,15 @@
 
             padding: 14px;
 
+            margin-top: 8px;
+
             border: none;
 
-            border-radius: 8px;
+            border-radius: 9px;
 
-            background: #d4af37;
+            background: #dc2626;
 
-            color: #080808;
+            color: #ffffff;
 
             font-weight: bold;
 
@@ -173,93 +277,211 @@
 
             cursor: pointer;
 
-            margin-top: 8px;
+            transition: all 0.25s ease;
+
         }
+
 
         button:hover {
 
-            background: #f0d77a;
+            background: #b91c1c;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 22px
+                rgba(220, 38, 38, 0.20);
+
         }
 
+
+        /* =========================================
+           ERROR MESSAGE
+           ========================================= */
+
+        .message,
         .error {
 
-            background: #2a1717;
+            margin-bottom: 18px;
 
-            color: #ff9999;
+            padding: 11px;
 
-            padding: 10px;
+            border-radius: 8px;
 
-            border-radius: 7px;
+            background: #fef2f2;
+
+            color: #b91c1c;
+
+            border: 1px solid #fecaca;
 
             text-align: center;
 
             font-size: 13px;
 
-            margin-bottom: 15px;
         }
+
+
+        /* =========================================
+           LOGIN LINK
+           ========================================= */
 
         .login {
 
             text-align: center;
 
-            color: #777;
+            margin-top: 23px;
 
-            margin-top: 22px;
+            color: #6b7280;
 
             font-size: 14px;
+
         }
+
 
         .login a {
 
-            color: #d4af37;
+            color: #dc2626;
 
             text-decoration: none;
 
             font-weight: bold;
+
+        }
+
+
+        .login a:hover {
+
+            color: #b91c1c;
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =========================================
+           SECURITY
+           ========================================= */
+
+        .security {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #9ca3af;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 500px) {
+
+            body {
+
+                padding: 15px;
+
+            }
+
+            .signup-container {
+
+                width: 100%;
+
+                padding: 30px 25px;
+
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
 
-    <div class="container">
+
+    <div class="signup-container">
+
+
+        <!-- LOGO -->
 
         <div class="logo">
 
             <div class="logo-icon">
+
                 ✦
+
             </div>
 
+
             <h1>
+
                 SUPPORT<span>AI</span>
+
             </h1>
+
+
+            <p>
+
+                INTELLIGENT CUSTOMER SUPPORT
+
+            </p>
 
         </div>
 
-        <h2>Create Account</h2>
+
+        <!-- TITLE -->
+
+        <h2>
+
+            Create Account
+
+        </h2>
+
 
         <p class="subtitle">
+
             Join the intelligent support platform
+
         </p>
+
+
+        <!-- ERROR -->
 
         {% if error %}
 
-        <div class="error">
+        <div class="message">
+
             {{ error }}
+
         </div>
 
         {% endif %}
 
-        <form method="POST"
-              action="/signup">
 
-            <div class="group">
+        <!-- =====================================
+             SIGNUP FORM
+             ===================================== -->
+
+        <form method="POST"
+              action="{{ url_for('signup') }}">
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
 
                 <label>
+
                     Full Name
+
                 </label>
+
 
                 <input
                     type="text"
@@ -270,11 +492,17 @@
 
             </div>
 
-            <div class="group">
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
 
                 <label>
+
                     Email Address
+
                 </label>
+
 
                 <input
                     type="email"
@@ -285,37 +513,50 @@
 
             </div>
 
-            <div class="group">
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
 
                 <label>
+
                     Password
+
                 </label>
+
 
                 <input
                     type="password"
                     name="password"
                     placeholder="Create a password"
-                    minlength="6"
                     required
                 >
 
             </div>
 
-            <div class="group">
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form-group">
 
                 <label>
+
                     Confirm Password
+
                 </label>
+
 
                 <input
                     type="password"
                     name="confirm_password"
                     placeholder="Confirm your password"
-                    minlength="6"
                     required
                 >
 
             </div>
+
+
+            <!-- BUTTON -->
 
             <button type="submit">
 
@@ -323,19 +564,36 @@
 
             </button>
 
+
         </form>
+
+
+        <!-- LOGIN -->
 
         <div class="login">
 
             Already have an account?
 
-            <a href="/login">
+            <a href="{{ url_for('login') }}">
+
                 Sign In
+
             </a>
 
         </div>
 
+
+        <!-- SECURITY -->
+
+        <div class="security">
+
+            🔒 Secure authentication • SUPPORTAI
+
+        </div>
+
+
     </div>
+
 
 </body>
 

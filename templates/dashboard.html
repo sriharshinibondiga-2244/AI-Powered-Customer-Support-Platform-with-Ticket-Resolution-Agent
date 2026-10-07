@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AeroAssist AI | Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                ✦
+            </div>
+
+            <div class="brand-text">
+                <h1>
+                    AERO<span>ASSIST</span> AI
+                </h1>
+
+                <p>
+                    AIRPORT & AIRWAYS<br>
+                    SUPPORT
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-divider"></div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="/dashboard" class="nav-item active">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a href="/" class="nav-item">
+                <span>▣</span>
+                Tickets
+            </a>
+
+            <a href="/" class="nav-item">
+                <span>◇</span>
+                AI Agents
+            </a>
+
+            <a href="/dashboard" class="nav-item active">
+                <span>◫</span>
+                Analytics
+            </a>
+
+            <a href="/" class="nav-item">
+                <span>✉</span>
+                Feedback
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+
+                <span></span>
+
+                <div>
+                    <strong>SYSTEM ONLINE</strong>
+                    <small>All AI agents operational</small>
+                </div>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    S
+                </div>
+
+                <div>
+                    <strong>Admin</strong>
+                    <small>Support Manager</small>
+                </div>
+
+            </div>
+
+
+            <button class="logout-btn">
+                ↪ Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =====================================
+             HEADER
+        ====================================== -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="gold-label">
+                    AIRPORT & AIRWAYS INTELLIGENCE PLATFORM
+                </p>
+
+                <h1>
+                    Passenger Support Command Center
+                </h1>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================
+             KPI CARDS
+        ====================================== -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span>TOTAL TICKETS TODAY</span>
+                    <b>#</b>
+                </div>
+
+                <strong>63</strong>
+
+                <small>
+                    Live support requests
+                </small>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span>AI RESOLUTION RATE</span>
+                    <b>!</b>
+                </div>
+
+                <strong>78%</strong>
+
+                <small>
+                    Requires attention
+                </small>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span>AVG. AI RESOLUTION TIME</span>
+                    <b>✦</b>
+                </div>
+
+                <strong>2.3 sec</strong>
+
+                <small>
+                    Automatically processed
+                </small>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span>USER SATISFACTION</span>
+                    <b>↑</b>
+                </div>
+
+                <strong>90%</strong>
+
+                <small>
+                    Human intervention
+                </small>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ANALYTICS DASHBOARD
+        ====================================== -->
+
+        <section class="analytics-dashboard">
+
+
+            <!-- PASSENGER VOLUME -->
+
+            <div class="analytics-card">
+
+                <div class="analytics-card-header">
+
+                    <div>
+
+                        <p class="gold-label">
+                            PERFORMANCE
+                        </p>
+
+                        <h2>
+                            Passenger Volume & Resolution
+                        </h2>
+
+                        <p>
+                            Real-time passenger support activity
+                        </p>
+
+                    </div>
+
+                    <span class="analytics-live">
+                        LIVE
+                    </span>
+
+                </div>
+
+
+                <div class="analytics-chart">
+
+                    <div class="chart-y-axis">
+
+                        <span>120</span>
+                        <span>100</span>
+                        <span>80</span>
+                        <span>60</span>
+                        <span>40</span>
+                        <span>20</span>
+                        <span>0</span>
+
+                    </div>
+
+
+                    <div class="chart-main">
+
+                        <div class="chart-grid-lines">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+
+                        <svg
+                            id="ticketVolumeChart"
+                            viewBox="0 0 700 300"
+                            preserveAspectRatio="none"
+                            aria-label="Weekly tickets received and resolved chart">
+
+                            <polyline
+                                id="receivedLine"
+                                points="">
+                            </polyline>
+
+                            <polyline
+                                id="resolvedLine"
+                                points="">
+                            </polyline>
+
+                        </svg>
+
+
+                        <div class="chart-x-axis">
+
+                            <span>Monday</span>
+                            <span>Tuesday</span>
+                            <span>Wednesday</span>
+                            <span>Thursday</span>
+                            <span>Friday</span>
+                            <span>Saturday</span>
+                            <span>Sunday</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-legend">
+
+                    <span>
+                        <i></i>
+                        Tickets Received
+                    </span>
+
+                    <span>
+                        <i></i>
+                        Tickets Resolved
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SYSTEM OPTIMIZATION -->
+
+            <div class="analytics-card">
+
+                <div class="analytics-card-header">
+
+                    <div>
+
+                        <p class="gold-label">
+                            AI PERFORMANCE
+                        </p>
+
+                        <h2>
+                            System Optimization Metrics
+                        </h2>
+
+                        <p>
+                            AeroAssist AI workflow performance
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="optimization-grid">
+
+                    <div>
+
+                        <span>
+                            Classification Accuracy
+                        </span>
+
+                        <strong>
+                            94%
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Resolution Success Rate
+                        </span>
+
+                        <strong>
+                            91%
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Knowledge Base Coverage
+                        </span>
+
+                        <strong>
+                            92%
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            System Uptime
+                        </span>
+
+                        <strong>
+                            99.9%
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Average Response Time
+                        </span>
+
+                        <strong>
+                            2.8 sec
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            User Satisfaction Score
+                        </span>
+
+                        <strong>
+                            90%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 ESCALATION WORKFLOW
+            ================================== -->
+
+            <div class="analytics-card escalation-card">
+
+                <div class="analytics-card-header">
+
+                    <div>
+
+                        <p class="gold-label">
+                            WORKFLOW
+                        </p>
+
+                        <h2>
+                            Escalation Workflow Status
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="escalation-list">
+
+
+                    <div>
+
+                        <strong>
+                            01
+                        </strong>
+
+                        <span>
+                            AI Classification
+                        </span>
+
+                        <small>
+                            63 tickets classified by AI
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            02
+                        </strong>
+
+                        <span>
+                            AI Resolution Attempt
+                        </span>
+
+                        <small>
+                            49 tickets resolved by AI
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            03
+                        </strong>
+
+                        <span>
+                            Human Agent Review
+                        </span>
+
+                        <small>
+                            14 tickets reviewed by human support
+                        </small>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            04
+                        </strong>
+
+                        <span>
+                            Resolution Validation
+                        </span>
+
+                        <small>
+                            63 resolutions validated
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================
+     CHART SCRIPT
+========================================= -->
+
+<script>
+
+    const weeklyReceived =
+        [7, 11, 10, 9, 12, 8, 6];
+
+    const weeklyResolved =
+        [5, 9, 8, 7, 10, 6, 4];
+
+
+    function drawTicketChart(received, resolved) {
+
+        const receivedLine =
+            document.getElementById("receivedLine");
+
+        const resolvedLine =
+            document.getElementById("resolvedLine");
+
+        if (!receivedLine || !resolvedLine) {
+            return;
+        }
+
+
+        const chartWidth = 700;
+        const chartHeight = 300;
+        const maxValue = 120;
+
+        const horizontalPadding = 12;
+
+        const step =
+            (chartWidth - horizontalPadding * 2) / 6;
+
+
+        function createPoints(values) {
+
+            return values.map((value, index) => {
+
+                const x =
+                    horizontalPadding +
+                    index * step;
+
+                const safeValue =
+                    Math.min(value, maxValue);
+
+                const y =
+                    chartHeight -
+                    (safeValue / maxValue) *
+                    chartHeight;
+
+                return `${x},${y}`;
+
+            }).join(" ");
+
+        }
+
+
+        receivedLine.setAttribute(
+            "points",
+            createPoints(received)
+        );
+
+
+        resolvedLine.setAttribute(
+            "points",
+            createPoints(resolved)
+        );
+
+    }
+
+
+    drawTicketChart(
+        weeklyReceived,
+        weeklyResolved
+    );
+
+</script>
+
+
+</body>
+</html>
